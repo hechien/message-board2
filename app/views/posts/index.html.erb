@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="mb-4">My messages board</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <%= render "form", post: @post %>
+  </div>
+</div>
+
+<div id="posts">
+  <%= render partial: :post, collection: @posts %>
+</div>
+

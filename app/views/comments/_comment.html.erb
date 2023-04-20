@@ -1,0 +1,7 @@
+<div id="<%= dom_id comment %>" class="card mb-4" style="width: 18rem;">
+  <div class="card-body">
+    <h6 class="card-subtitle">commented by <%= comment.author %> at <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></h6>
+    <p class="card-text"><%= comment.content %></p>
+    <p><%= button_to('Delete', comment_path(comment), class: 'btn btn-danger', method: :delete, data: { "turbo-confirm": "Are you sure?" }) %></p>
+  </div>
+</div>

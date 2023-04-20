@@ -1,0 +1,38 @@
+<div id="<%= dom_id post %>" class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title"><%= post.title %></h5>
+    <h6 class="card-subtitle">Posted by <%= post.author %> at <%= post.created_at.strftime("%Y-%m-%d %H:%M") %></h6>
+    <p class="card-text">
+      <%= post.content %>
+      <span><%= button_to('Destroy this post', post_url(post), method: :delete, class: 'btn btn-danger', data: { 'turbo-confirm': 'Really??' }) %></span>
+    </p>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <%= form_with(model: Comment.new(post: post)) do |form| %>
+          <%= form.hidden_field :post_id %>
+
+          <div>
+            <%= form.label :author, style: "display: block" %>
+            <%= form.text_field :author, class: 'form-control' %>
+          </div>
+
+          <div>
+            <%= form.label :content, style: "display: block" %>
+            <%= form.text_area :content, class: 'form-control' %>
+          </div>
+
+          <div>
+            <%= form.submit(class: 'btn btn-info') %>
+          </div>
+        <% end %>
+
+        <hr />
+
+        <% post.comments.order(id: :desc).each do |comment| %>
+          <%= render comment %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
